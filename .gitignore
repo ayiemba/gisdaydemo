@@ -1,0 +1,6 @@
+#.gitignore list
+java/
+ol3/
+WEB-INF/
+jquery-2.1.4.js
+proj4js/
