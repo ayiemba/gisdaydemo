@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'>
+	<link rel="shortcut icon" href="http://localhost:8080/countymap/#">
+	<title>Gis Day Demo</title>
+	<script src="http://localhost:8080/gisdaydemo/jquery-2.1.4.js" type="text/javascript"></script>
+	<script src="http://localhost:8080/gisdaydemo/ol3/v3.9.0/build/ol-debug.js" type="text/javascript"></script>
+	<script src="http://localhost:8080/gisdaydemo/proj4js/dist/proj4.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="http://localhost:8080/gisdaydemo/ol3/v3.9.0/css/ol.css" type="text/css" />
+	<link rel="stylesheet" href="http://localhost:8080/gisdaydemo/style.css" type="text/css"></style>
+</head>
+<body>
+
+<div id="container">
+	<div id="header">
+		<div id="logo">
+		<a href="index.html"><img id="hblogo"src="images/gisday_logo.png" /></a>
+		<div id="heading"><h3>GIS DAY 2015: PostGIS + GeoServer + OpenLayers3 Demo</h3></div>
+		</div>
+	</div>
+	<div id="map" class="map"></div>
+	
+	<div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content"></div>
+    </div>
+	
+	<div id="attribute"><p class="attribute">click parcel on map to display attributes</p></div>
+	<!--<div id="x"></div> 
+	<div id="y"></div>-->
+	<div id="info" class="alert alert-success">
+	    &nbsp;
+	</div>
+	
+	<div id="footer">
+		<div id="copyright"><h5>Copyright &copy; 2015 by Elvis Ayiemba. All rights reserved.</h5></div>
+	</div>
+
+
+<!--this script loads map and features after page loads-->
+<script src="http://localhost:8080/gisdaydemo/app.js" type="text/javascript"></script>
+</div>
+</body>
+</html>
