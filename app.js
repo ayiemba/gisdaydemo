@@ -1,7 +1,11 @@
 
-/*
+	/*
 	GIS day Postgis + Geosever + Openlayers 3 demo
-*/
+	*/
+ 	/*
+    this application renders geographical data onto a map in a browser.
+    it is based on the openLayers 3 library.
+    */
 
 
 	
