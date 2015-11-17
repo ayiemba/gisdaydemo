@@ -13,14 +13,9 @@
 	//defs for EPSG:32737 from spatialreference.org
 	//proj4.defs("EPSG:32737","+proj=utm+zone=37+south+ellps=WGS84+datum=WGS84+units=m+no_defs");
 
-	
 
 	var bounds = [276252.013496858, 9953135.05192152,276289.497092662, 9953168.66465541];
-	//var extent = ol.proj.transform([276252.013496858, 9953135.05192152,
-                    //276289.497092662, 9953168.66465541], "EPSG:32737","EPSG:4326");
-
 	var center = [276275.52448,9953153.40207];
-    //var center = ol.proj.transform([276269.55,9953153.99], "EPSG:32737","EPSG:4326");
 
     /** create layer and source instances **/
 
@@ -77,36 +72,31 @@
 		zoom: 21
 	});
 
-	/**
-    	Pop-up elements for displaying attributes of clicked feature
-     */
+	
+    //Pop-up elements for displaying attributes of clicked feature
+    
 	var container = document.getElementById('popup');
 	var content = document.getElementById('popup-content');
 	var closer = document.getElementById('popup-closer');
 
-	//var xcoord = document.getElementById('x');
-	//var ycoord = document.getElementById('y');
-
 	var mousePositionControl = new ol.control.MousePosition({
-              className: 'custom-mouse-position',
-              target: document.getElementById('location'),
-              coordinateFormat: ol.coordinate.createStringXY(5),
-              undefinedHTML: '&nbsp;'
-            });
+          className: 'custom-mouse-position',
+          target: document.getElementById('location'),
+          coordinateFormat: ol.coordinate.createStringXY(5),
+          undefinedHTML: '&nbsp;'
+        });
 
-	/**
- 	 * Add a click handler to hide the popup.
- 	 * @return (boolean)
- 	*/
+	
+ 	//click handler to hide the popup.
 	closer.onclick = function() {
 	    overlay.setPosition(undefined);
 	    closer.blur();
 	    return false;
 	};
 
-	/**
- 	* Create an overlay to anchor the popup to the map.
- 	*/
+	
+ 	//Create an overlay to anchor the popup to the map.
+ 	
 	var overlay = new ol.Overlay( ({
   		element: container,
   		autoPan: true,
@@ -144,14 +134,14 @@
         }
       }
 
-      /*function setAntialiasMode(mode) {
+      //antialias mode for edge smoothening
+      function setAntialiasMode(mode) {
         map.getLayers().forEach(function(lyr) {
           lyr.getSource().updateParams({'FORMAT_OPTIONS': 'antialias:' + mode});
         });
-      }*/
+      }
 
-
-	/**this function changes the cursor to a pointer when cursor is on map*/
+	//this function changes the cursor to a pointer when cursor is on map
 	map.on('pointermove', function(evt) {
 		if (evt.dragging) {
 		    return;
@@ -163,12 +153,10 @@
 		map.getTargetElement().style.cursor = hit ? 'pointer' : '';
 	});
 
-	/**Add a click handler to the map to render the popup.*/
+	//click handler to the map to render the popup.
 	map.on('singleclick', function(evt) {
 		var coordinate = evt.coordinate;
 		var viewResolution = (view.getResolution());
-		//var coords = ol.coordinate.toStringHDMS(coordinate);
-		//var coords = coordinate;//use to display coordinates on pop up
 
 		//variable to store requested feature info
 		if(parcels_untiled_source){
@@ -180,15 +168,11 @@
 		 	    coordinate, viewResolution,projection, 
 		 	    {'INFO_FORMAT': 'text/plain'});
 		}
-
-		//content.innerHTML='<p>Info:</p><code>'+coords+'</code>';//use to display coordinates of clicked point
+		
 		content.innerHTML = '<iframe seamless src="' + featureinfo + '"></iframe>';
 		overlay.setPosition(coordinate);
 
-		/** test for coordinate display*/
-		//xcoord.innerHTML = '<p>Lon:</p><code>'+coords[0]+'</code>';
-		//ycoord.innerHTML = '<p>Lat:</p><code>'+coords[1]+'</code>';
-	});
+		});
 
 
 	
