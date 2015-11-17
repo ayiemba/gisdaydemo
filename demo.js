@@ -1,5 +1,13 @@
       
+      /*
+        gis land parcels demo application. Demonstrates the 
+        use of postgis, geoserver and open layers
+      */
 
+      /*
+        this application renders geographical data onto a map in a browser,
+        it is based on the openLayers 3 library.
+      */
 
 
 
@@ -16,6 +24,7 @@
               undefinedHTML: '&nbsp;'
             });*/
 
+      //untiled layer
       var untiled = new ol.layer.Image({
         source: new ol.source.ImageWMS({
           ratio: 1,
@@ -28,6 +37,7 @@
         })
       });
 
+      //tiled layer
       var tiled = new ol.layer.Tile({
         visible: false,
         source: new ol.source.TileWMS({
@@ -63,34 +73,6 @@
         })
       });
 
-      /*map.getView().on('change:resolution', function(evt) {
-        var resolution = evt.target.get('resolution');
-        var units = map.getView().getProjection().getUnits();
-        var dpi = 25.4 / 0.28;
-        var mpu = ol.proj.METERS_PER_UNIT[units];
-        var scale = resolution * mpu * 39.37 * dpi;
-        if (scale >= 9500 && scale <= 950000) {
-          scale = Math.round(scale / 1000) + "K";
-        } else if (scale >= 950000) {
-          scale = Math.round(scale / 1000000) + "M";
-        } else {
-          scale = Math.round(scale);
-        }
-        document.getElementById('scale').innerHTML = "Scale = 1 : " + scale;
-      });
-      map.getView().fit(bounds, map.getSize());
-      map.on('singleclick', function(evt) {
-        document.getElementById('nodelist').innerHTML = "Loading... please wait...";
-        var view = map.getView();
-        var viewResolution = view.getResolution();
-        var source = untiled.get('visible') ? untiled.getSource() : tiled.getSource();
-        var url = source.getGetFeatureInfoUrl(
-          evt.coordinate, viewResolution, view.getProjection(),
-          {'INFO_FORMAT': 'text/html', 'FEATURE_COUNT': 50});
-        if (url) {
-          document.getElementById('nodelist').innerHTML = '<iframe seamless src="' + url + '"></iframe>';
-        }
-      });*/
 
       // sets the chosen WMS version
       function setWMSVersion(wmsVersion) {
@@ -99,7 +81,7 @@
         });
       }
 
-      // Tiling mode, can be 'tiled' or 'untiled'
+      // Tiling mode, layer can be 'tiled' or 'untiled'
       function setTileMode(tilingMode) {
         if (tilingMode == 'tiled') {
           untiled.set('visible', false);
@@ -110,11 +92,11 @@
         }
       }
 
-      function setAntialiasMode(mode) {
+      /*function setAntialiasMode(mode) {
         map.getLayers().forEach(function(lyr) {
           lyr.getSource().updateParams({'FORMAT_OPTIONS': 'antialias:' + mode});
         });
-      }
+      }*/
 
       // changes the current tile format
       function setImageFormat(mime) {
@@ -123,6 +105,7 @@
         });
       }
 
+      //sets style
       function setStyle(style){
         map.getLayers().forEach(function(lyr) {
           lyr.getSource().updateParams({'STYLES': style});
